@@ -4,6 +4,12 @@ docker create --platform linux/amd64 --name psycopglayer amitassaraf/psycopg-lam
 docker create --platform linux/amd64 --name psycopglayer_c amitassaraf/psycopg-c-lambda
 docker cp psycopglayer:/opt/psycopg/psycopg_binary .
 docker cp psycopglayer_c:/opt/psycopg/psycopg_c .
+docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/libpq.so.5 psycopg_binary/libpq.so.5
+docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/libpq.so psycopg_binary/libpq.so
+docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/libpq.so.5.13 psycopg_binary/libpq.so.5.13
+docker cp psycopglayer_c:/usr/lib/x86_64-linux-gnu/libpq.so.5 psycopg_c/libpq.so.5
+docker cp psycopglayer_c:/usr/lib/x86_64-linux-gnu/libpq.so psycopg_c/libpq.so
+docker cp psycopglayer_c:/usr/lib/x86_64-linux-gnu/libpq.so.5.13 psycopg_c/libpq.so.5.13
 PY_EXT=$(echo $1 | tr . _)
 mv psycopg_binary psycopg_binary_$PY_EXT
 mv psycopg_c psycopg_c_$PY_EXT
