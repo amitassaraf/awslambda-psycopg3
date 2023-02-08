@@ -22,6 +22,8 @@ docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1 lib/libcrypto.
 docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/libldap-2.4.so.2 lib/libldap-2.4.so.2
 docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/libldap_r-2.4.so.2 lib/libldap_r-2.4.so.2
 docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/libldap_r-2.4.so.2.11.5 lib/libldap_r-2.4.so.2.11.5
+docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/liblber-2.4.so.2.11.5 lib/liblber-2.4.so.2.11.5
+docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/liblber-2.4.so.2 lib/liblber-2.4.so.2
 
 PY_EXT=$(echo $1 | tr . _)
 mv psycopg_binary psycopg_binary_$PY_EXT
