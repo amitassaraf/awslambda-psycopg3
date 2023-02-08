@@ -1,13 +1,11 @@
 docker build -f Dockerfile --platform linux/amd64 . -t amitassaraf/psycopg-lambda  --build-arg python_ver=$1
-docker build -f DockerfileC --platform linux/amd64 . -t amitassaraf/psycopg-c-lambda  --build-arg python_ver=$1
 docker create --platform linux/amd64 --name psycopglayer amitassaraf/psycopg-lambda
-docker create --platform linux/amd64 --name psycopglayer_c amitassaraf/psycopg-c-lambda
 rm -rf lib
 mkdir -p lib
-docker cp psycopglayer:/opt/psycopg/psycopg_binary .
-docker cp psycopglayer_c:/opt/psycopg/psycopg_c .
+docker cp psycopglayer:/opt/psycopg/psycopg .
 # Copy all the needed library files
 
+docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/libpq.a lib/libpq.a
 docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/libpq.so.5 lib/libpq.so.5
 docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/libpq.so lib/libpq.so
 docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/libpq.so.5.13 lib/libpq.so.5.13
@@ -26,8 +24,6 @@ docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/liblber-2.4.so.2.11.5 lib/liblb
 docker cp psycopglayer:/usr/lib/x86_64-linux-gnu/liblber-2.4.so.2 lib/liblber-2.4.so.2
 
 PY_EXT=$(echo $1 | tr . _)
-mv psycopg_binary psycopg_binary_$PY_EXT
-mv psycopg_c psycopg_c_$PY_EXT
+mv psycopg psycopg_$PY_EXT
 docker rm -f psycopglayer
-docker rm -f psycopglayer_c
 
